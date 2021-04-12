@@ -9,9 +9,7 @@ namespace Shapes
         static void Main(string[] args)
         {
 
-            Triangle shape = ShapesLib.CreateShape(25, 39, 15);
-
-            Console.WriteLine(shape.IsRectangular());
+            Triangle shape = ShapesLib.CreateShape(12, 15, 18);
             Console.WriteLine(ShapesLib.GetSquare(shape));
 
             Console.ReadLine();

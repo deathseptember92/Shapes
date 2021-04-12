@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Shapes_Lib
 {
@@ -8,7 +9,7 @@ namespace Shapes_Lib
         double GetSquare();
     }
 
-    public struct Round : IShape
+    public struct Round : IShape,IEquatable<Round>
     {
 
         private double radius;
@@ -22,13 +23,18 @@ namespace Shapes_Lib
             this.radius = radius;
         }
 
+        public bool Equals(Round other)
+        {
+            return radius == other.radius;
+        }
+
         public double GetSquare()
         {
-            return Math.PI * radius * radius;
+            return Math.Round(Math.PI * Math.Pow(radius,2),2);
         }
     }
 
-    public struct Triangle : IShape
+    public struct Triangle : IShape,IEquatable<Triangle>
     {
 
         private double a;
@@ -51,13 +57,18 @@ namespace Shapes_Lib
         {
             double[] sides = { a, b, c };
             Array.Sort(sides);
-            return Math.Sqrt(sides[2]) == (Math.Sqrt(sides[0]) + Math.Sqrt(sides[1]));
+            return Math.Pow(sides[2],2) == (Math.Pow(sides[0],2) + Math.Pow(sides[1],2));
         }
 
         public double GetSquare()
         {
             double p = (a + b + c) / 2;
-            return Math.Sqrt(p * (p - a) * (p - b) * (p - c));
+            return Math.Round(Math.Sqrt(p * (p - a) * (p - b) * (p - c)),2);
+        }
+
+        public bool Equals(Triangle other)
+        {
+            return a == other.a && b == other.b && c == other.c;
         }
     }
 
